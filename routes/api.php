@@ -33,3 +33,4 @@ Route::post('/contact/store_contact_api', [ContactController::class, 'store_cont
 
 //products
 Route::get('/product/all_product_api', [ProductController::class, 'all_product_api']);
+Route::get('/product/single_product_api/{id}', [ProductController::class, 'single_product_api']);

@@ -21,15 +21,17 @@ class ProductController extends Controller
         return view('frontend.single_product' , compact('products'));
     }
 
+    public function single_product_api($id)
+    {
+        $products = Product::find($id);
+        return response()->json($products, 200);
+    }
+    
     public function store(StoreProductRequest $request)
     {
         //
     }
 
-    public function show(Product $product)
-    {
-        //
-    }
 
     public function edit(Product $product)
     {
