@@ -29,12 +29,18 @@
 		    <div class="container">
 		      	<div class="row">
 
+					@foreach ($products as $product)
+						
 					<!-- Start Column 4 -->
 					<div class="col-12 col-md-4 col-lg-3 mb-5">
-						<a class="product-item" href="#">
-							<img src="{{ asset('frontend/images/product-3.png') }}" class="img-fluid product-thumbnail">
-							<h3 class="product-title">Ergonomic Chair</h3>
-							<strong class="product-price">$43.00</strong>
+						<a class="product-item" href="{{ route('single_product', ['id'=>$product->id]) }}">
+							<img src="{{ asset('frontend/images/' . $product->image) }}" class="img-fluid product-thumbnail">
+							<h3 class="product-title">{{$product->name}}</h3>
+							<br>
+							<h3 class="product-title">{{$product->category->title}}</h3>
+							<br>
+							<del class="product-price bold">{{$product->price}}</del>
+							<strong class="product-price " style="margin-left: 50px">   {{$product->sale_price}}</strong>
 
 							<span class="icon-cross">
 								<img src="{{ asset('frontend/images/cross.svg') }}" class="img-fluid">
@@ -42,6 +48,8 @@
 						</a>
 					</div>
 					<!-- End Column 4 -->
+
+					@endforeach
 
                     
 		      	</div>

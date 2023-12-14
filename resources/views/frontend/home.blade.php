@@ -8,4 +8,4 @@
 @include('frontend.layout.blog')
 @include('frontend.layout.Testimonials')
 
-@include('frontend.layout.blog')@endsection
+@endsection

@@ -24,27 +24,32 @@
     <!-- End Hero Section -->
 
     
-		<!-- Start Why Choose Us Section -->
-		<div class="why-choose-section">
-			<div class="container">
-				
-				
-				<div class="row my-5">
-					<div class="col-6 col-md-6 col-lg-3 mb-4">
-						<div class="feature">
-							<div class="icon">
-								<img src="{{ asset('frontend/images/truck.svg') }}" alt="Image" class="imf-fluid">
-							</div>
-							<h3>Fast &amp; Free Shipping</h3>
-							<p>Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate.</p>
-						</div>
-					</div>
+    <div class="why-choose-section">
+        <div class="container">
+            
+            
+            <div class="row my-5">
 
 
-				</div>
-			
-			</div>
-		</div>
-		<!-- End Why Choose Us Section -->
+
+                @foreach ($services as $service)
+                    
+
+                <div class="col-6 col-md-6 col-lg-3 mb-4">
+                    <div class="feature">
+                        <div class="icon">
+                            <img src="{{ asset('frontend/images/' . $service->icon) }}" alt="Image" class="imf-fluid">
+                        </div>
+                        <h3>{{$service->title}}</h3>
+                        <p>{{$service->desc}}.</p>
+                    </div>
+                </div>
+
+                @endforeach
+
+            </div>
+        
+        </div>
+    </div>
 
 @endsection
