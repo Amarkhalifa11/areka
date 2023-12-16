@@ -55,6 +55,18 @@ Route::get('/contact', function () {
 Route::get('/cart', function () {
     return view('frontend.cart');
 })->name('cart');
+
+// Route::get('/add_to_cart', function () {
+//     return redirect()->route('home');
+// });
+
+// Route::get('/remove_from_cart', function () {
+//     return redirect()->route('home');
+// });
+
+// Route::get('/edit_quantity', function () {
+//     return redirect()->route('home');
+// });
 // ______________________________________________________________________________________________________
 
 Route::middleware([
@@ -74,6 +86,7 @@ Route::middleware([
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
  
 
 
@@ -82,3 +95,8 @@ Route::get('/posts/single_post/{id}', [PostController::class, 'single_post'])->n
 Route::post('/contact/store', [ContactController::class, 'store'])->name('contact.store');
  
 Route::get('/products/single_product/{id}', [ProductController::class, 'single_product'])->name('single_product');
+
+Route::post('/add_to_cart', [CartController::class, 'add_to_cart'])->name('add_to_cart');
+Route::post('/remove_from_cart', [CartController::class, 'remove_from_cart'])->name('remove_from_cart');
+Route::post('/edit_quantity', [CartController::class, 'edit_quantity'])->name('edit_quantity');
+

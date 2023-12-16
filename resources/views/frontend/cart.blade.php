@@ -37,30 +37,51 @@
                         </tr>
                       </thead>
                       <tbody>
+
+                        @if (Session::has('cart'))
+                        @foreach (Session::get('cart') as $product)
+                            
+
                         <tr>
                           <td class="product-thumbnail">
-                            <img src="images/product-1.png" alt="Image" class="img-fluid">
+                            <img src="{{ asset('frontend/images/'. $product['image']) }}" alt="Image" class="img-fluid">
                           </td>
                           <td class="product-name">
-                            <h2 class="h5 text-black">Product 1</h2>
+                            <h2 class="h5 text-black">{{$product['name']}}</h2>
                           </td>
-                          <td>$49.00</td>
+                          <td>{{$product['price']}}</td>
                           <td>
+
+
+                          <form action="{{ route('edit_quantity') }}" method="POST">
+                            @csrf
                             <div class="input-group mb-3 d-flex align-items-center quantity-container" style="max-width: 120px;">
-                              <div class="input-group-prepend">
-                                <button class="btn btn-outline-black decrease" type="button">&minus;</button>
-                              </div>
-                              <input type="text" class="form-control text-center quantity-amount" value="1" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1">
-                              <div class="input-group-append">
-                                <button class="btn btn-outline-black increase" type="button">&plus;</button>
-                              </div>
+
+                              <input type="submit" value="-" name="decrease" class="edit-btn" style="border: none">
+                              <input type="hidden" name="id" value="{{$product['id']}}">
+                              <input type="text" readonly name="quantity" class="form-control text-center quantity-amount" value="{{$product['quantity']}}" aria-label="Example text with button addon" aria-describedby="button-addon1">
+                              <input type="submit" value="+" name="increase" class="edit-btn" style="border: none">
+
                             </div>
         
+                          </form>
+
+
                           </td>
-                          <td>$49.00</td>
-                          <td><a href="#" class="btn btn-black btn-sm">X</a></td>
+                          <td>$ {{$product['quantity'] * $product['price']}}</td>
+
+                          <form method="POST" action="{{ route('remove_from_cart') }}">
+                            @csrf
+                            <input type="hidden" name="id" value="{{$product['id']}}">
+
+                            <td><input type="submit" name="remove_btn" value="remove" style="border: none" ></td>
+
+                          </form>
                         </tr>
 
+
+                        @endforeach
+                        @endif
 
 
                       </tbody>
@@ -86,9 +107,17 @@
                         <div class="col-md-6">
                           <span class="text-black">Total</span>
                         </div>
+                        @if (Session::has('cart'))
+                        @if (Session::has('total'))
+                            
+                        
                         <div class="col-md-6 text-right">
-                          <strong class="text-black">$230.00</strong>
+                          <strong class="text-black">${{Session::get('total')}}</strong>
                         </div>
+                        
+                        @endif
+                        @endif
+
                       </div>
         
                       <div class="row">
