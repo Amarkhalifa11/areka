@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -156,6 +157,67 @@ class CartController extends Controller
         }
 
         return view('frontend.cart');
+    }
+
+    public function place_order(Request $request){
+
+        if ($request->session()->has('cart')) {
+            
+
+            $name    = $request->name;
+            $email   = $request->email;
+            $adress  = $request->adress;
+            $phone   = $request->phone;
+            $city    = $request->city;
+            $date    = date('Y-m-d');
+            $status  = "not paid";
+            $cost    = $request->session()->get('total');
+
+            $cart = $request->session()->get('cart');
+
+            $order_id = DB::table('orders')->insertGetId([
+
+                'name'    => $name,
+                'email'   => $email,
+                'cost'    => $cost,
+                'adress'  => $adress,
+                'phone'   => $phone,
+                'city'    => $city,
+                'date'    => $date,
+                'status'  => $status,
+            ] , 'id');
+
+            
+            foreach ($cart as $id => $product) {
+                
+                $product = $cart[$id];
+
+                $product_id        = $product['id'];
+                $product_name      = $product['name'];
+                $product_price     = $product['price'];
+                $product_quantity  = $product['quantity'];
+                $product_image     = $product['image'];
+                $order_date        = date('Y-m-d');
+
+                $order_items = DB::table('order_items')->insert([
+                    'order_id'          => $order_id,
+                    'product_id'        => $product_id,
+                    'product_name'      => $product_name,
+                    'product_image'     => $product_image,
+                    'product_price'     => $product_price,
+                    'product_quantity'  => $product_quantity,
+                    'order_date'        => $order_date,
+                ]);
+            }
+
+            
+            $request->session()->put('order_id' , $order_id);
+            return view('frontend.payment');
+
+
+        }else{
+            return redirect()->route('home');
+        }
     }
 
 }

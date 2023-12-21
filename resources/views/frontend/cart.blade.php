@@ -121,9 +121,17 @@
                       </div>
         
                       <div class="row">
-                        <div class="col-md-12">
-                          <button class="btn btn-black btn-lg py-3 btn-block" onclick="window.location='checkout.html'">Proceed To Checkout</button>
-                        </div>
+                        @if (Session::has('total'))
+                        @if (Session::get('total') != 0)
+                            
+                        <form action="{{ route('checkout') }}" method="GET">
+                          @csrf
+                          <input type="submit" value="checkout" class="btn btn-black btn-lg py-3 btn-block">
+                        </form>
+
+                        @endif
+                        @endif
+
                       </div>
                     </div>
                   </div>

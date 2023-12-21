@@ -56,13 +56,19 @@ Route::get('/cart', function () {
     return view('frontend.cart');
 })->name('cart');
 
-// Route::get('/add_to_cart', function () {
-//     return redirect()->route('home');
-// });
+// ______________________________________________________________________________________________________
 
-// Route::get('/remove_from_cart', function () {
-//     return redirect()->route('home');
-// });
+Route::get('/checkout', function () {
+    return view('frontend.checkout');
+})->name('checkout');
+
+Route::get('/payment', function () {
+    return view('frontend.payment');
+})->name('payment');
+
+Route::get('/thank_you', function () {
+    return view('frontend.thank_you');
+})->name('thank_you');
 
 // Route::get('/edit_quantity', function () {
 //     return redirect()->route('home');
@@ -87,6 +93,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\PaymentController;
  
 
 
@@ -99,4 +106,7 @@ Route::get('/products/single_product/{id}', [ProductController::class, 'single_p
 Route::post('/add_to_cart', [CartController::class, 'add_to_cart'])->name('add_to_cart');
 Route::post('/remove_from_cart', [CartController::class, 'remove_from_cart'])->name('remove_from_cart');
 Route::post('/edit_quantity', [CartController::class, 'edit_quantity'])->name('edit_quantity');
+Route::post('/place_order', [CartController::class, 'place_order'])->name('place_order');
 
+Route::get('/verify/{transaction_id}', [PaymentController::class, 'verify'])->name('verify');
+Route::get('/complete', [PaymentController::class, 'complete'])->name('complete');
