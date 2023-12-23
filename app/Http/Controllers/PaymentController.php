@@ -43,4 +43,18 @@ class PaymentController extends Controller
 
         }
     }
+
+    public function all_payment(){
+        $payments = DB::table('payments')->get();
+        return view('backend.payment.all_payment' , compact('payments'));
+    }
+
+    public function destroy($id){
+        $payments = DB::table('payments')
+        ->where('id', $id)
+        ->delete();
+        return redirect()->route('dashboard.payment.all_payment')->with('message' , 'the payment is deleted successfully');
+    // dd($payments);    
+    } 
+
 }

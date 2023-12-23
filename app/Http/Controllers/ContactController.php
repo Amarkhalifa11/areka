@@ -4,14 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use App\Http\Requests\StoreContactRequest;
-use App\Http\Requests\UpdateContactRequest;
+use Illuminate\Support\Facades\DB;
 
 class ContactController extends Controller
 {
 
-    public function index()
+    public function all_contact()
     {
-        //
+        $contacts = Contact::latest()->get();
+        return view('backend.contact.all_contact' , compact('contacts'));
     }
 
     public function store(StoreContactRequest $request)
@@ -49,8 +50,14 @@ class ContactController extends Controller
     }
 
 
-    public function destroy(Contact $contact)
+    public function destroy($id)
     {
-        //
+        // $contacts = Contact::find($id);
+        $contacts = DB::table('contacts')
+        ->where('id' , $id)
+        ->delete();
+
+        // $contacts->delete();
+        return redirect()->route('dashboard.contacts.all_contact')->with('message' , 'the contact is deleted successfully');
     }
 }

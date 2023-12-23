@@ -7,6 +7,14 @@ use App\Models\Service;
 use App\Models\Post;
 use App\Models\Product;
 
+
+use App\Http\Controllers\PostController;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\BackendController;
+use App\Http\Controllers\CategoryController;
 // ______________________________________________________________________________________________________
 // ______________________________________________________________________________________________________
 
@@ -79,23 +87,45 @@ Route::middleware([
     'auth:sanctum',
     config('jetstream.auth_session'),
     'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+    ])->group(function () {
+        Route::get('/dashboard', function () {
+            return view('backend.home');
+        })->name('dashboard');
+        
+        Route::get('/dashboard/users/all_user', [BackendController::class, 'all_users'])->name('dashboard.users.all_users');
+        Route::get('/dashboard/users/delete/{id}', [BackendController::class, 'delete'])->name('dashboard.users.delete');
+
+        
+        //category
+        
+        Route::get('/dashboard/category/all_categoty', [CategoryController::class, 'all_categoty'])->name('dashboard.category.all_categoty');
+        Route::get('/dashboard/category/create', [CategoryController::class, 'create'])->name('dashboard.category.create');
+        Route::post('/dashboard/category/store', [CategoryController::class, 'store'])->name('dashboard.category.store');
+        Route::get('/dashboard/category/edit/{id}', [CategoryController::class, 'edit'])->name('dashboard.category.edit');
+        Route::post('/dashboard/category/update/{id}', [CategoryController::class, 'update'])->name('dashboard.category.update');
+        Route::get('/dashboard/category/destroy/{id}', [CategoryController::class, 'destroy'])->name('dashboard.category.destroy');
+
+
+        //contact
+
+        Route::get('/dashboard/contacts/all_contact', [ContactController::class, 'all_contact'])->name('dashboard.contacts.all_contact');
+        Route::get('/dashboard/contacts/destroy/{id}', [ContactController::class, 'destroy'])->name('dashboard.contacts.destroy');
+
+
+        //payment
+        Route::get('/dashboard/payment/all_payment', [PaymentController::class, 'all_payment'])->name('dashboard.payment.all_payment');
+        Route::get('/dashboard/payment/destroy/{id}', [PaymentController::class, 'destroy'])->name('dashboard.payment.destroy');
+
+
+
+    });
+    
+    Route::get('/logout', [BackendController::class, 'logout'])->name('logout');
+
 
 // ______________________________________________________________________________________________________
 
 // #frontend
-
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\ContactController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\PaymentController;
- 
-
 
 Route::get('/posts/single_post/{id}', [PostController::class, 'single_post'])->name('single_post');
  
@@ -103,10 +133,12 @@ Route::post('/contact/store', [ContactController::class, 'store'])->name('contac
  
 Route::get('/products/single_product/{id}', [ProductController::class, 'single_product'])->name('single_product');
 
-Route::post('/add_to_cart', [CartController::class, 'add_to_cart'])->name('add_to_cart');
-Route::post('/remove_from_cart', [CartController::class, 'remove_from_cart'])->name('remove_from_cart');
+Route::post('/cart/add_to_cart', [CartController::class, 'add_to_cart'])->name('add_to_cart');
+Route::post('/cart/remove_from_cart', [CartController::class, 'remove_from_cart'])->name('remove_from_cart');
 Route::post('/edit_quantity', [CartController::class, 'edit_quantity'])->name('edit_quantity');
-Route::post('/place_order', [CartController::class, 'place_order'])->name('place_order');
+Route::post('/cart/place_order', [CartController::class, 'place_order'])->name('place_order');
 
 Route::get('/verify/{transaction_id}', [PaymentController::class, 'verify'])->name('verify');
 Route::get('/complete', [PaymentController::class, 'complete'])->name('complete');
+
+
