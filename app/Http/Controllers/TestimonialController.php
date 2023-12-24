@@ -15,33 +15,16 @@ class TestimonialController extends Controller
         return response()->json($opinians, 200);
     }
 
-    public function create()
+    public function all_testimonials()
     {
-        //
+        $testimonials = Testimonial::all();
+        return view('backend.testimonials.all_testimonials' , compact('testimonials'));
     }
 
-    public function store(StoreTestimonialRequest $request)
+    public function destroy($id)
     {
-        //
-    }
-
-    public function show(Testimonial $testimonial)
-    {
-        //
-    }
-
-    public function edit(Testimonial $testimonial)
-    {
-        //
-    }
-
-    public function update(UpdateTestimonialRequest $request, Testimonial $testimonial)
-    {
-        //
-    }
-
-    public function destroy(Testimonial $testimonial)
-    {
-        //
+        $testimonials = Testimonial::find($id);
+        $testimonials->delete();
+        return redirect()->route('dashboard.testimonials.all_testimonials')->with('message' , 'the Testimonial is deleted sucessfully');
     }
 }

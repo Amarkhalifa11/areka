@@ -47,6 +47,44 @@
                         </div>
                     </div>
 
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-chart-bar me-2"></i>Service</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{{ route('dashboard.service.all_service') }}" class="dropdown-item">All Service</a>
+                            <a href="{{ route('dashboard.service.create') }}" class="dropdown-item">Add Service</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-keyboard me-2"></i>team</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{{ route('dashboard.team.all_team') }}" class="dropdown-item">All person</a>
+                            <a href="{{ route('dashboard.team.create') }}" class="dropdown-item">Add person</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>testimonials</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{{ route('dashboard.testimonials.all_testimonials') }}" class="dropdown-item">All testimonials</a>
+                        </div>
+                    </div>
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-chart-bar me-2"></i>orders</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{{ route('dashboard.orders.all_orders') }}" class="dropdown-item">All orders</a>
+                        </div>
+                    </div>
+
+                    
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-laptop me-2"></i>orders items</a>
+                        <div class="dropdown-menu bg-transparent border-0"> 
+                            <a href="{{ route('dashboard.orders_items.all_orders_items') }}" class="dropdown-item">All orders</a>
+                        </div>
+                    </div>
+                    
 
                     {{-- <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a> --}}
                     {{-- <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a> --}}

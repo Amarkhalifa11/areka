@@ -7,59 +7,19 @@ use Illuminate\Http\Request;
 
 class OrderItemsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+
+    public function all_orders_items()
     {
-        //
+        $all_orders_items = Order_items::all();
+        return view('backend.orders items.all_orders_item' , compact('all_orders_items'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function destroy($id)
     {
-        //
-    }
+        
+        $all_orders_items = Order_items::find($id);
+        $all_orders_items->delete();
+        return redirect()->route('dashboard.orders_items.all_orders_items')->with('message' , 'the item is deleted successfully');
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Order_items $order_items)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Order_items $order_items)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Order_items $order_items)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Order_items $order_items)
-    {
-        //
     }
 }

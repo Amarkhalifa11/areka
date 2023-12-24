@@ -14,4 +14,9 @@ class Service extends Model
         'user_id',
         'icon',
     ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'user_id');
+    }
 }

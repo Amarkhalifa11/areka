@@ -15,6 +15,11 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\BackendController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\TeamController;
+use App\Http\Controllers\TestimonialController;
+use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\OrderItemsController;
 // ______________________________________________________________________________________________________
 // ______________________________________________________________________________________________________
 
@@ -78,9 +83,6 @@ Route::get('/thank_you', function () {
     return view('frontend.thank_you');
 })->name('thank_you');
 
-// Route::get('/edit_quantity', function () {
-//     return redirect()->route('home');
-// });
 // ______________________________________________________________________________________________________
 
 Route::middleware([
@@ -92,6 +94,8 @@ Route::middleware([
             return view('backend.home');
         })->name('dashboard');
         
+        //user
+
         Route::get('/dashboard/users/all_user', [BackendController::class, 'all_users'])->name('dashboard.users.all_users');
         Route::get('/dashboard/users/delete/{id}', [BackendController::class, 'delete'])->name('dashboard.users.delete');
 
@@ -117,6 +121,40 @@ Route::middleware([
         Route::get('/dashboard/payment/destroy/{id}', [PaymentController::class, 'destroy'])->name('dashboard.payment.destroy');
 
 
+        //service
+        Route::get('/dashboard/service/all_service', [ServiceController::class, 'all_service'])->name('dashboard.service.all_service');
+        Route::get('/dashboard/service/create', [ServiceController::class, 'create'])->name('dashboard.service.create');
+        Route::post('/dashboard/service/store', [ServiceController::class, 'store'])->name('dashboard.service.store');
+        Route::get('/dashboard/service/edit/{id}', [ServiceController::class, 'edit'])->name('dashboard.service.edit');
+        Route::post('/dashboard/service/update/{id}', [ServiceController::class, 'update'])->name('dashboard.service.update');
+        Route::get('/dashboard/service/destroy/{id}', [ServiceController::class, 'destroy'])->name('dashboard.service.destroy');
+        
+        
+        //team
+        Route::get('/dashboard/team/all_team', [TeamController::class, 'all_teams'])->name('dashboard.team.all_team');
+        Route::get('/dashboard/team/create', [TeamController::class, 'create'])->name('dashboard.team.create');
+        Route::get('/dashboard/team/edit/{id}', [TeamController::class, 'edit'])->name('dashboard.team.edit');
+        Route::post('/dashboard/team/update/{id}', [TeamController::class, 'update'])->name('dashboard.team.update');
+        Route::post('/dashboard/team/store', [TeamController::class, 'store'])->name('dashboard.team.store');
+        Route::get('/dashboard/team/destroy/{id}', [TeamController::class, 'destroy'])->name('dashboard.team.destroy');
+
+
+        //payment
+        Route::get('/dashboard/testimonials/all_testimonials', [TestimonialController::class, 'all_testimonials'])->name('dashboard.testimonials.all_testimonials');
+        Route::get('/dashboard/testimonials/destroy/{id}', [TestimonialController::class, 'destroy'])->name('dashboard.testimonials.destroy');
+        
+
+
+        //orders
+        Route::get('/dashboard/orders/all_orders', [OrdersController::class, 'all_orders'])->name('dashboard.orders.all_orders');
+        Route::get('/dashboard/orders/destroy/{id}', [OrdersController::class, 'destroy'])->name('dashboard.orders.destroy');
+
+
+        //orders item
+        Route::get('/dashboard/orders_items/all_orders_items', [OrderItemsController::class, 'all_orders_items'])->name('dashboard.orders_items.all_orders_items');
+        Route::get('/dashboard/orders_items/destroy/{id}', [OrderItemsController::class, 'destroy'])->name('dashboard.orders_items.destroy');
+        
+                
 
     });
     

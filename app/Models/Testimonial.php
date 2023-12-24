@@ -16,4 +16,9 @@ class Testimonial extends Model
         'opinian',
         'team_id',
     ];
+
+    public function team()
+    {
+        return $this->hasOne(Team::class, 'id', 'team_id');
+    }
 }
