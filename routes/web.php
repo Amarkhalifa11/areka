@@ -154,7 +154,25 @@ Route::middleware([
         Route::get('/dashboard/orders_items/all_orders_items', [OrderItemsController::class, 'all_orders_items'])->name('dashboard.orders_items.all_orders_items');
         Route::get('/dashboard/orders_items/destroy/{id}', [OrderItemsController::class, 'destroy'])->name('dashboard.orders_items.destroy');
         
+        
+        //posts
+        Route::get('/dashboard/posts/all_post', [PostController::class, 'all_post'])->name('dashboard.posts.all_post');
+        Route::get('/dashboard/posts/create', [PostController::class, 'create'])->name('dashboard.posts.create');
+        Route::post('/dashboard/posts/store', [PostController::class, 'store'])->name('dashboard.posts.store');
+        Route::get('/dashboard/posts/edit/{id}', [PostController::class, 'edit'])->name('dashboard.posts.edit');
+        Route::post('/dashboard/posts/update/{id}', [PostController::class, 'update'])->name('dashboard.posts.update');
+        Route::get('/dashboard/posts/destroy/{id}', [PostController::class, 'destroy'])->name('dashboard.posts.destroy');
                 
+
+
+        //products
+        Route::get('/dashboard/product/all_product', [ProductController::class, 'all_product'])->name('dashboard.product.all_product');
+        Route::get('/dashboard/product/create', [ProductController::class, 'create'])->name('dashboard.product.create');
+        Route::post('/dashboard/product/store', [ProductController::class, 'store'])->name('dashboard.product.storee');
+        Route::get('/dashboard/product/edit/{id}', [ProductController::class, 'edit'])->name('dashboard.product.edit');
+        Route::post('/dashboard/product/update/{id}', [ProductController::class, 'update'])->name('dashboard.product.update');
+        Route::get('/dashboard/product/destroy/{id}', [ProductController::class, 'destroy'])->name('dashboard.product.destroy');
+                        
 
     });
     

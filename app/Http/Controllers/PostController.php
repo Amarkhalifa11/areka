@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Team;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 
@@ -28,29 +29,88 @@ class PostController extends Controller
     }
 
 
-    public function create()
+    public function all_post()
     {
-        //
+        $posts = Post::all();
+        return view('backend.posts.all_posts' , compact('posts'));
+    }
+
+    public function create(){
+        $teams = Team::all();
+        return view('backend.posts.add_post' , compact('teams'));
     }
 
     public function store(StorePostRequest $request)
     {
-        //
+        $title = $request->title;
+        $date = $request->date;
+        $desc = $request->desc;
+        $team_id = $request->team_id;
+        $image_post = $request->file('image');
+
+
+        $name_gen = hexdec(uniqid()); 
+        $img_ext = strtolower($image_post->getClientOriginalExtension()); 
+        $img_name = $name_gen . '.' . $img_ext; 
+         
+        $upload_location = 'frontend/images/'; 
+        $image = $img_name; 
+        $image_post->move($upload_location,$img_name); 
+
+        $post = Post::create([
+            'title' => $title,
+            'date' => $date,
+            'desc' => $desc,
+            'image' => $image,
+            'team_id' => $team_id,
+        ]);
+
+        return redirect()->route('dashboard.posts.all_post')->with('message' , 'the post is added successfully');
     }
 
 
-    public function edit(Post $post)
+    public function edit( $id)
     {
-        //
+        $post = Post::find($id);
+        $teams = Team::all();
+
+        return view('backend.posts.edit_post' , compact('post' , 'teams'));
     }
 
-    public function update(UpdatePostRequest $request, Post $post)
+    public function update(UpdatePostRequest $request, $id)
     {
-        //
+        $post = Post::find($id);
+        $title = $request->title;
+        $date = $request->date;
+        $desc = $request->desc;
+        $team_id = $request->team_id;
+        $image_post = $request->file('image');
+
+
+        $name_gen = hexdec(uniqid()); 
+        $img_ext = strtolower($image_post->getClientOriginalExtension()); 
+        $img_name = $name_gen . '.' . $img_ext; 
+         
+        $upload_location = 'frontend/images/'; 
+        $image = $img_name; 
+        $image_post->move($upload_location,$img_name); 
+
+        $post->update([
+            'title' => $title,
+            'date' => $date,
+            'desc' => $desc,
+            'image' => $image,
+            'team_id' => $team_id,
+        ]);
+
+        return redirect()->route('dashboard.posts.all_post')->with('message' , 'the post is updated successfully');
     }
 
-    public function destroy(Post $post)
+    public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+        return redirect()->route('dashboard.posts.all_post')->with('message' , 'the post is deleted successfully');
+
     }
 }

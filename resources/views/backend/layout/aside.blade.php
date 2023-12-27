@@ -86,6 +86,23 @@
                     </div>
                     
 
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-table me-2"></i>Posts</a>
+                        <div class="dropdown-menu bg-transparent border-0"> 
+                            <a href="{{ route('dashboard.posts.all_post') }}" class="dropdown-item">All posts</a>
+                            <a href="{{ route('dashboard.posts.create') }}" class="dropdown-item">add posts</a>
+                        </div>
+                    </div>
+
+
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>Product</a>
+                        <div class="dropdown-menu bg-transparent border-0"> 
+                            <a href="{{ route('dashboard.product.all_product') }}" class="dropdown-item">All Product</a>
+                            <a href="{{ route('dashboard.product.create') }}" class="dropdown-item">add Product</a>
+                        </div>
+                    </div>
+
                     {{-- <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a> --}}
                     {{-- <a href="form.html" class="nav-item nav-link"><i class="fa fa-keyboard me-2"></i>Forms</a> --}}
                     {{-- <a href="table.html" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Tables</a> --}}
